@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Not A Number</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <link rel="stylesheet" type="text/css" href="nan.css" media="all" />
+    <script type="text/javascript" src="javascript/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="javascript/color-conversion-algorithms.js"></script>
+    <script type="text/javascript" src="javascript/read-css.js"></script>
+    <script type="text/javascript" src="javascript/background.js" > </script>
+    <script type="text/javascript" src="javascript/analyzer.js" charset="utf-8"> </script>
+    <script type="text/javascript" src="javascript/mouse.js" charset="utf-8" > </script>
+    <script type="text/javascript" src="javascript/grid.js" charset="utf-8" > </script>
+    <script type="text/javascript" src="javascript/elements.js" charset="utf-8" > </script>
+    <script type="text/javascript" src="javascript/game.js"  charset="utf-8"> </script>
+    <script type="text/javascript" src="javascript/rotateTask.js"  charset="utf-8"> </script>
+    <script type="text/javascript" src="javascript/audioPlayer.js" charset="utf-8" > </script>
+</head>
+<body>
+  <div id="title" style="position:relative;">
+    <div id = "title-1" class = "title" style="color: #897; line-height: 80%; font-size: 192px; margin: 20px 0 0 0; text-shadow: 3px 3px 10px hsla(0, 0%, 0%, 0.2)">NAN</div>
+    <div id = "title-3" class = "title" style="color: #585; line-height: 95%; font-size: 42.7px; text-shadow: 3px 3px 10px hsla(0, 0%, 0%, 0.2);">A Game for Nannan</div>
+  </div>
+  <div id="container"  class="board" style="margin: 30px auto">
+    <div id="number-show" class="board">
+      <div id="number-show-number" class="number-show-box"> </div>
+      <div id="number-show-score" class="number-show-box" style="color: #595;"> </div>
+      <div id="number-show-ajax" class="number-show-box" style="color: #595; bottom: 34px; margin: 0 0; line-height: 20px; position: absolute; width: 600px; font-size: 25px; color: #464"> </div>
+      <div id="number-show-descriptions" charset="UTF-8" class="number-show-box" style=" line-height:50px; font-family: '黑体'; margin: 0 auto;"> </div>
+      <div id="number-show-hint" charset="UTF-8"> Click to continue</div>
+    </div>
+
+    <div id="game-area" class="board">
+      <div class="score" style="z-index: 4000; top: 0px">0</div>
+      <progress id="progressbar" value="100" max="100" style="position: absolute; left:53px; top: 75px; width: 496px;"></progress> 
+    </div>
+
+
+    <div id="game-over-screen" class="board" style="z-index:5001;">
+      <div style="font-size:70px; margin: 100px auto; text-align: center; color: #789">Game Over</div>
+      <div style="font-size:50px; margin: 100px auto; text-align: center; color: #784">Your score is </div>
+      <div class="score" style="top:400px">
+        0nan
+      </div>
+
+      <div id="game-over-nan" charset="UTF-8" style="background-color: #bbf; color:#524; height: 35px; box-shadow: 0px 5px 15px #888; cursor: pointer"> I'm Nannan...</div>
+
+      <div id="game-over-hint" charset="UTF-8" style="background-color: #4f4; color:#524; height: 35px; box-shadow: 0px 5px 15px #888; cursor: pointer"> Play Again</div>
+
+    </div>
+
+
+
+    <div id="welcome-screen" class="board" style="z-index: 5002">
+      <div style="font-size:130px; margin: 30px auto 0">数非数</div>
+      <div style="font-size:48px; margin: 0px 0px 100px">给某人的生日礼物</div>
+
+      <div style="font-size:34px; margin: 30px auto 10px">感谢基友们的测试与指导</div>
+      <div style="font-size:20px; ">在计算机/iPad上使用Chrome/Safari浏览器<br>以获得更好的体验</div>
+      <div style="font-size:18px; ">在计算机上请按下F11进入全屏模式并开启声音</div>
+      <div style="font-size:68px; margin: 70px auto">Click to start</div>
+      <div id="welcome-screen-user-count" style="font-size:20px; margin: 15px auto; position:absolute; top:153px; width:600px"></div>
+    </div>
+    <div id="nan-screen" class="board" style="z-index: 1000;">
+      <div style="font-size:54px; margin: 70px auto 0">Happy Birthday</div>
+      <div style="font-size:112px; margin: 0px 0px 100px">Nannan</div>
+      <div class="right-aligned-text" style="font-size:29px;">Best wishes from Mengmeng</div>
+      <div id="nan-player-count" class="right-aligned-text" style="font-size:20px;"></div>
+      <div style="font-size:45px; margin: 70px auto">Click to play again<div>
+    </div>
+
+  </div>
+
+  <div id="how-to-play" style="margin: 30px auto; display: none;">
+    <div style="width: 600px; margin: 0 auto; font-size: 20px; line-height: 120%; color: #282; text-align: center">
+      在一分钟内连出你喜欢的数字<br>
+      Link the grids to get your favourite numbers in 1 minute. <br>
+      性质越好的数字，得分越高<br>
+      More special numbers are with more points! <br> 
+    </div>
+  </div>
+</body>
+</html>

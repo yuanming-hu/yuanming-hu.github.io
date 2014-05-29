@@ -1,0 +1,194 @@
+body {
+    -webkit-user-select: none;
+    background: url(background.png) repeat
+}
+
+#heading {
+    font-family: MyHelvetica;
+    
+}
+
+.square {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    margin: 2px;
+    box-shadow: 2px 3px 3px hsla(0, 0%, 0%, 0.4);
+    text-align: center;
+    border-radius: 20%;
+    -webkit-transition: border-radius 200ms;
+    transition: border-radius 200ms;
+}
+
+.square:hover {
+   border-radius: 50%;
+}
+
+
+.number {
+    color: rgb(0, 127, 100);
+    visibility: visible;
+    font-family: MyHelvetica;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 56px;
+    font-weight: bold;
+    font-size: 50px;
+    cursor: default;
+}
+
+.score {
+    color: #595;
+    font-family: MyHelvetica;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 120px;
+    width: 600px;
+    font-size: 70px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 70px;
+}
+
+@font-face {
+    font-family: MyHelvetica;
+    src: url("Helvetica/helvetica-light.otf");
+}
+
+.board {
+    position: absolute;
+    height: 600px;
+    width: 680px;
+    background: url(skulls.png) repeat
+}
+
+#container {
+    margin: auto auto auto auto;
+    box-shadow: 0px 0px 20px hsla(0, 0%, 0%, 0.4);
+    position: relative;
+    opacity: 0.9
+}
+
+.title {
+    font-family: MyHelvetica;
+    text-align: center;
+    padding: 0;
+}
+
+.background-block {
+    background-color: #090;
+    box-shadow: 5px 5px 15px #000;
+    position: absolute;
+    opacity: 0.1;
+}
+
+#number-show {
+    margin: 0 auto;
+    position: absolute;
+    background-color: #aaf;
+    z-index: 5000;
+}
+
+div {
+    font-family: MyHelvetica;
+}
+
+.number-show-box {
+    font-size: 50px; margin: 50px auto; text-align: center; font-family: MyHelvetica
+}
+
+#number-show-number {
+    font-size: 6.6em;
+    color: #060;
+}
+
+#number-show-hint {
+    font-size: 1.6em;
+    color: #060;
+    width: 600px;
+    margin: auto auto 20px;
+    position: absolute;
+    bottom: -0.7em;
+    text-align: center;
+    font-family: MyHelvetica
+}
+
+
+
+#game-over-hint {
+    font-size: 1.6em;
+    color: #060;
+    width: 600px;
+    margin: auto auto 20px;
+    position: absolute;
+    bottom: -0.2em;
+    text-align: center;
+    font-family: MyHelvetica
+}
+
+
+#game-over-nan {
+    font-size: 1.6em;
+    color: #060;
+    width: 600px;
+    margin: auto auto 20px;
+    position: absolute;
+    bottom: 1.4em;
+    text-align: center;
+    font-family: MyHelvetica
+}
+
+#game-over-screen {
+    position: absolute;
+}
+
+progress {  
+    background-color: #f3f3f3;  
+    border: 0;
+    height: 18px;
+    border-radius: 10%;  
+}  
+
+progress[value]::-webkit-progress-value {
+    background-image:
+    /*
+       -webkit-linear-gradient(-45deg, 
+                               transparent 33%, rgba(0, 0, 0, .1) 33%, 
+                               rgba(0,0, 0, .1) 66%, transparent 66%),
+       -webkit-linear-gradient(top, 
+                               rgba(255, 255, 255, .25), 
+                               rgba(0, 0, 0, .25)),
+    */
+    -webkit-linear-gradient(left, hsl(140, 54%, 70%), hsl(140, 54%, 70%));
+    border-radius: 20px; 
+    background-size: auto 20px, 100% 100%, 100% 100%;
+    background-color: #fff;
+}
+
+progress::-webkit-progress-bar {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 3px 3px 2px hsla(0, 0%, 0%, 0.2),
+                inset 0px 0px 15px hsla(0, 0%, 0%, 0.1);
+}
+
+
+#welcome-screen div {
+    font-size:70px;
+    margin: 0; auto;
+    text-align: center;
+    color: #789
+}
+
+#nan-screen div {
+    font-size:70px;
+    margin: 0; auto;
+    text-align: center;
+    color: #789
+}
+
+#nan-screen .right-aligned-text {
+    width: 600px;
+    text-align: center;
+}
