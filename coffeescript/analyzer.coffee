@@ -143,7 +143,7 @@ class NAN.APNumberSet extends NAN.NumberSet
 			newDelta = (n[i + 1] - n[i])
 			if newDelta == 0
 				return null
-			if delta == -10
+			if delta == -11
 				delta = newDelta
 			else 
 				if delta != newDelta
