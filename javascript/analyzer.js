@@ -91,7 +91,7 @@
     };
 
     NumberSet.prototype.logEvalutor = function(n) {
-      return 30 + 5 * Math.pow(Math.log(parseInt(n)), 2.5);
+      return 30 + 5 * Math.pow(Math.log(parseInt(n)), 1.8);
     };
 
     NumberSet.prototype.analyze = function(n) {

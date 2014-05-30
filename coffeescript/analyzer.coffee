@@ -57,7 +57,7 @@ class NAN.NumberSet
 		return 10 * Math.pow(n.length, 3)
 
 	logEvalutor: (n)->
-		return 30 + 5 * Math.pow(Math.log(parseInt(n)), 2.5)
+		return 30 + 5 * Math.pow(Math.log(parseInt(n)), 1.8)
 	
 	analyze: (n)->
 		result = {score: 1, description: ""}
