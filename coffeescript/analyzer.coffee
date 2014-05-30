@@ -498,8 +498,13 @@ class NAN.meaningfulNumberSet extends NAN.NumberSet
 			score: 20
 
 		@newNumber
-			number: 3600,
+			number: 1440,
 			description: "一天的分钟数",
+			score: 20
+
+		@newNumber
+			number: 3600,
+			description: "一小时的秒数",
 			score: 20
 
 
