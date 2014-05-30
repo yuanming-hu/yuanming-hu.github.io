@@ -263,6 +263,16 @@ class NAN.FactorialNumberSet extends NAN.NumberSet
 		@evaluate = (n)=>
 			@sqrtEvalutor(n)
 
+class NAN.PerfectNumberSet extends NAN.NumberSet
+	constructor: ()->
+		super()
+		@description = "完全数"
+		@numbers = [6, 28, 496, 8128, 33550336, 8589869056]
+		@filters = [@listFilter]
+		@evaluate = (n)=>
+			@sqrtEvalutor(n)
+
+
 class NAN.HundredNumberSet extends NAN.NumberSet
 	constructor: ()->
 		super()

@@ -481,6 +481,25 @@
 
   })(NAN.NumberSet);
 
+  NAN.PerfectNumberSet = (function(_super) {
+
+    __extends(PerfectNumberSet, _super);
+
+    function PerfectNumberSet() {
+      var _this = this;
+      PerfectNumberSet.__super__.constructor.call(this);
+      this.description = "完全数";
+      this.numbers = [6, 28, 496, 8128, 33550336, 8589869056];
+      this.filters = [this.listFilter];
+      this.evaluate = function(n) {
+        return _this.sqrtEvalutor(n);
+      };
+    }
+
+    return PerfectNumberSet;
+
+  })(NAN.NumberSet);
+
   NAN.HundredNumberSet = (function(_super) {
 
     __extends(HundredNumberSet, _super);
