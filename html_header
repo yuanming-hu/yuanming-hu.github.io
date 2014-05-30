@@ -1,0 +1,8 @@
+<script type="text/javascript" src="javascript/constants.js" charset="utf-8"> </script>
+<script type="text/javascript" src="javascript/game.js" charset="utf-8"> </script>
+<script type="text/javascript" src="javascript/analyzer.js" charset="utf-8"> </script>
+<script type="text/javascript" src="javascript/grid.js" charset="utf-8"> </script>
+<script type="text/javascript" src="javascript/mouse.js" charset="utf-8"> </script>
+<script type="text/javascript" src="javascript/elements.js" charset="utf-8"> </script>
+<script type="text/javascript" src="javascript/audioPlayer.js" charset="utf-8"> </script>
+<script type="text/javascript" src="javascript/rotateTask.js" charset="utf-8"> </script>

@@ -294,6 +294,12 @@
 
   this.init = function() {
     var _this = this;
+    $("#container").css("opacity", 0.0);
+    $("#container").css("visibility", "visible");
+    $("#container").animate({
+      opacity: 1.0
+    }, 1000);
+    $("#container").show();
     $.totalPlayers = "many";
     $.totalNumbers = "lots of";
     $("#nan-screen").hide(0);

@@ -215,6 +215,10 @@ $.dataServer = "http://59.66.130.206:3000/"
     )
 
 @init = ()->
+    $("#container").css("opacity", 0.0)
+    $("#container").css("visibility", "visible")
+    $("#container").animate({opacity: 1.0}, 1000)
+    $("#container").show()
     $.totalPlayers = "many"
     $.totalNumbers = "lots of"
     $("#nan-screen").hide(0)

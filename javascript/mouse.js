@@ -52,8 +52,8 @@
         descriptions = result.descriptions.filter(function(desc) {
           return desc !== null && desc !== "";
         }).join("<br>");
-        if (result.score === 0) {
-          descriptions = "";
+        if (result.score === 0 && descriptions === "") {
+          descriptions = "平凡的数";
         }
         $.numberShow = new NAN.NumberShow({
           n: numberString,
@@ -80,7 +80,7 @@
 
     Mouse.prototype.addGrid = function(grid) {
       var inside, node, _i, _len, _ref;
-      if (this.path.length >= 9) {
+      if (this.path.length >= 8) {
         return;
       }
       if (this.path.length === 0 && grid.value === 0) {

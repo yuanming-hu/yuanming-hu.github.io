@@ -6,7 +6,6 @@ class NAN.Mouse
 
     checkPath: ()->
         result = true
-       # console.log(@path.length)
         if @path.length < 2
             result = false
         if @path.length > 0
@@ -20,7 +19,6 @@ class NAN.Mouse
         for node in @path
             val = node.grid.value
             result += val.toString()
-      #  console.log(result)
         return result
 
     beginPath: ()->
@@ -37,8 +35,8 @@ class NAN.Mouse
                     (desc)->
                         return desc != null and desc != ""
                     ).join("<br>")
-            if result.score == 0
-                descriptions = ""
+            if result.score == 0 and descriptions == ""
+                descriptions = "平凡的数"
             $.numberShow = new NAN.NumberShow
                 n: numberString,
                 descriptions: descriptions,
@@ -56,7 +54,7 @@ class NAN.Mouse
         @path = []
 
     addGrid: (grid)->
-        if @path.length >= 9
+        if @path.length >= 8
             return
         if @path.length == 0 and grid.value == 0
             return

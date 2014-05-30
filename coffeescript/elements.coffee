@@ -24,9 +24,7 @@ class NAN.NumberShow
         @getElement().animate({opacity: "0.70"}, 200)
         @getElementNumber().html(data.n)
         @getElementScore().html(data.score.toString() + " points")
-        if data.descriptions == null or data.descriptions == ""
-            data.descriptions = "平凡的数"
-        else
+        if data.score != 0
             @queryServer(data.n)
         @getElementDescriptions().html(data.descriptions)
 
@@ -54,7 +52,7 @@ class NAN.NumberShow
         queryNumber(-1)
         queryNumber(n,
             (text)=>
-                @getElementAjax().html("您第#{text}个发现了这个数")
+                @getElementAjax().html("你第#{text}个发现了这个数")
                 @getElementAjax().fadeIn(200)
         )
 

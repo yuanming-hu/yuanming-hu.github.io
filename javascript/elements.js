@@ -43,9 +43,7 @@
       }, 200);
       this.getElementNumber().html(data.n);
       this.getElementScore().html(data.score.toString() + " points");
-      if (data.descriptions === null || data.descriptions === "") {
-        data.descriptions = "平凡的数";
-      } else {
+      if (data.score !== 0) {
         this.queryServer(data.n);
       }
       this.getElementDescriptions().html(data.descriptions);
@@ -67,7 +65,7 @@
       var _this = this;
       queryNumber(-1);
       return queryNumber(n, function(text) {
-        _this.getElementAjax().html("您第" + text + "个发现了这个数");
+        _this.getElementAjax().html("你第" + text + "个发现了这个数");
         return _this.getElementAjax().fadeIn(200);
       });
     };
