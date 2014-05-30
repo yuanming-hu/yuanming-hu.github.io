@@ -57,16 +57,23 @@ class NAN.Mouse
         @path = []
 
     addGrid: (grid)->
+        inside = false
+        for i in [0...@path.length]
+            node = @path[i]
+            if node.x == grid.x and node.y == grid.y
+                inside = true
+                console.log(123)
+                for j in [(i + 1)...@path.length]
+                    @path[j].grid.selected = false
+                @path = @path.slice(0, i + 1)
+                return
         if @path.length >= 8
             gameHint("最长只能是8个数字T_T")
             return
         if @path.length == 0 and grid.value == 0
             gameHint("不能以0开始哦")
             return
-        inside = false
-        for node in @path
-            if node.x == grid.x and node.y == grid.y
-                inside = true
+
         if not inside
             if @path.length == 0 or @path[@path.length - 1].grid.isConnecting(grid)
                 grid.makeSound()

@@ -37,9 +37,9 @@ class NAN.AudioPlayer
 					@pointer[i] = 0
 					@sounds[i] = []
 					fileType = "mp3"
-					if navigator.appName.toLowerCase().indexOf("netscape") != -1
-						fileType = "wav"
-					console.log(fileType)
+#					if navigator.appName.toLowerCase().indexOf("netscape") != -1
+#					fileType = "wav"
+#					console.log(fileType)
 					@sounds[i][0] = new Audio("sound/sound#{i}#{suffix}.#{fileType}")
 					@sounds[i][0].load()
 					for j in [1...@copies]

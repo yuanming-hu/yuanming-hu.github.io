@@ -82,19 +82,6 @@
 
     Mouse.prototype.addGrid = function(grid) {
       var i, inside, j, node, _i, _j, _ref, _ref1, _ref2;
-      inside = false;
-      for (i = _i = 0, _ref = this.path.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
-        node = this.path[i];
-        if (node.x === grid.x && node.y === grid.y) {
-          inside = true;
-          console.log(123);
-          for (j = _j = _ref1 = i + 1, _ref2 = this.path.length; _ref1 <= _ref2 ? _j < _ref2 : _j > _ref2; j = _ref1 <= _ref2 ? ++_j : --_j) {
-            this.path[j].grid.selected = false;
-          }
-          this.path = this.path.slice(0, i + 1);
-          return;
-        }
-      }
       if (this.path.length >= 8) {
         gameHint("最长只能是8个数字T_T");
         return;
@@ -102,6 +89,19 @@
       if (this.path.length === 0 && grid.value === 0) {
         gameHint("不能以0开始哦");
         return;
+      }
+      inside = false;
+      for (i = _i = 0, _ref = this.path.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+        node = this.path[i];
+        if (node.x === grid.x && node.y === grid.y) {
+          inside = true;
+          console.log(123);
+          for (j = _j = _ref1 = i + 1, _ref2 = this.path.length; _ref1 <= _ref2 ? _j < _ref2 : _j > _ref2; j = _ref1 <= _ref2 ? ++_j : --_j) {
+            this.path[j].selected = false;
+          }
+          this.path = this.path.slice(0, i + 1);
+          return;
+        }
       }
       if (!inside) {
         if (this.path.length === 0 || this.path[this.path.length - 1].grid.isConnecting(grid)) {
