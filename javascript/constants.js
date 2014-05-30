@@ -3,6 +3,4 @@
 
   window.NAN = {};
 
-  console.log = function() {};
-
 }).call(this);

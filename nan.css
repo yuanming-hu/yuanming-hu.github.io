@@ -158,16 +158,16 @@ progress::-webkit-progress-bar {
 
 #welcome-screen div {
     font-size:70px;
-    margin: 0; auto;
+    margin: 0 auto;
     text-align: center;
-    color: #789
+    color: #789;
 }
 
 #nan-screen div {
     font-size:70px;
-    margin: 0; auto;
+    margin: 0 auto;
     text-align: center;
-    color: #789
+    color: #789;
 }
 
 #nan-screen .right-aligned-text {

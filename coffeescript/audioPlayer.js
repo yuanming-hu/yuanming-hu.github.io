@@ -52,8 +52,8 @@
           _this.pointer[i] = 0;
           _this.sounds[i] = [];
           fileType = "mp3";
-          if (navigator.appName.toLowerCase().indexOf("netscape") !== -1) {
-            fileType = "wav";
+          if (navigator.appName.toLowerCase().indexOf("mozilla") !== -1) {
+            fileType = "ogg";
           }
           console.log(fileType);
           _this.sounds[i][0] = new Audio("sound/sound" + i + suffix + "." + fileType);

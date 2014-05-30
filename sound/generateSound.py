@@ -26,9 +26,10 @@ def generate(n, program, suffix, sf = "/usr/share/sounds/sf2/FluidR3_GM.sf2", vo
 
 	os.system("fluidsynth %s output.mid -F output.wav --sample-rate 1000"  % sf)
 	os.system("lame -V 7 output.wav sound%d%s.mp3" % (n, suffix))
+#	os.system("avconv -i output.wav  -acodec sound%d%s.aac" % (n, suffix))
 	os.system("rm output.mid")
 #	os.system("mplayer output.wav")
-	os.system("rm output.wav")
+	os.system("mv output.wav sound%d%s.wav" % (n, suffix))
 
 	
 

@@ -1,3 +1,3 @@
 window.NAN = {}
-console.log = ()->
-	return
+#console.log = ()->
+#	return
