@@ -35,19 +35,21 @@ class NAN.Mouse
                     (desc)->
                         return desc != null and desc != ""
                     ).join("<br>")
-            if result.score == 0 and descriptions == ""
-                descriptions = "平凡的数"
-            $.numberShow = new NAN.NumberShow
-                n: numberString,
-                descriptions: descriptions,
-                score: result.score
-            
-            $.game.score.addValue(result.score)
-            if result.score != 0
-                for i in [0...@path.length]
-                    node = @path[i]
-                    $.audioPlayerB.playString(numberString)
-                    node.grid.clean()
+            if result.score == 0 # and descriptions == ""
+                gameHint("这只是一个平凡的数, 放了它吧")
+            else
+                $.numberShow = new NAN.NumberShow
+                    n: numberString,
+                    descriptions: descriptions,
+                    score: result.score
+                
+                $.game.score.addValue(result.score)
+                $.audioPlayerB.playString(numberString)
+
+                if result.score != 0
+                    for i in [0...@path.length]
+                        node = @path[i]
+                        node.grid.clean()
         for node in @path
             node.grid.selected = false
         @state = "none"
@@ -57,6 +59,7 @@ class NAN.Mouse
         if @path.length >= 8
             return
         if @path.length == 0 and grid.value == 0
+            gameHint("不能以0开始哦")
             return
         inside = false
         for node in @path

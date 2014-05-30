@@ -52,20 +52,21 @@
         descriptions = result.descriptions.filter(function(desc) {
           return desc !== null && desc !== "";
         }).join("<br>");
-        if (result.score === 0 && descriptions === "") {
-          descriptions = "平凡的数";
-        }
-        $.numberShow = new NAN.NumberShow({
-          n: numberString,
-          descriptions: descriptions,
-          score: result.score
-        });
-        $.game.score.addValue(result.score);
-        if (result.score !== 0) {
-          for (i = _i = 0, _ref = this.path.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
-            node = this.path[i];
-            $.audioPlayerB.playString(numberString);
-            node.grid.clean();
+        if (result.score === 0) {
+          gameHint("这只是一个平凡的数, 放了它吧");
+        } else {
+          $.numberShow = new NAN.NumberShow({
+            n: numberString,
+            descriptions: descriptions,
+            score: result.score
+          });
+          $.game.score.addValue(result.score);
+          $.audioPlayerB.playString(numberString);
+          if (result.score !== 0) {
+            for (i = _i = 0, _ref = this.path.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+              node = this.path[i];
+              node.grid.clean();
+            }
           }
         }
       }
@@ -84,6 +85,7 @@
         return;
       }
       if (this.path.length === 0 && grid.value === 0) {
+        gameHint("不能以0开始哦");
         return;
       }
       inside = false;

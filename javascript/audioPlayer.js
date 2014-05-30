@@ -27,7 +27,7 @@
     }
 
     AudioTask.prototype.play = function() {
-      return this.audioPlayer.play(this.n, 0.3);
+      return this.audioPlayer.play(this.n, 1.0);
     };
 
     return AudioTask;
@@ -37,8 +37,7 @@
   NAN.AudioPlayer = (function() {
 
     function AudioPlayer(suffix) {
-      var i, _i,
-        _this = this;
+      var _this = this;
       this.disabled = $.mobileMode;
       if (this.disabled) {
         return;
@@ -46,21 +45,20 @@
       this.sounds = [[]];
       this.copies = 8;
       this.pointer = [];
-      for (i = _i = 0; _i < 10; i = ++_i) {
-        this.pointer[i] = 0;
-        this.sounds[i] = [];
-        this.sounds[i][0] = new Audio("sound/sound" + i + suffix + ".mp3");
-        this.sounds[i][0].load();
-      }
       setTimeout(function() {
-        var j, _j, _results;
+        var i, j, _i, _results;
         _results = [];
-        for (i = _j = 0; _j < 10; i = ++_j) {
+        for (i = _i = 0; _i < 10; i = ++_i) {
+          _this.pointer[i] = 0;
+          _this.sounds[i] = [];
+          _this.sounds[i][0] = new Audio("sound/sound" + i + suffix + ".mp3");
+          _this.sounds[i][0].load();
           _results.push((function() {
-            var _k, _ref, _results1;
+            var _j, _ref, _results1;
             _results1 = [];
-            for (j = _k = 1, _ref = this.copies; 1 <= _ref ? _k < _ref : _k > _ref; j = 1 <= _ref ? ++_k : --_k) {
-              _results1.push(this.sounds[i].push(this.sounds[i][0].cloneNode(true)));
+            for (j = _j = 1, _ref = this.copies; 1 <= _ref ? _j < _ref : _j > _ref; j = 1 <= _ref ? ++_j : --_j) {
+              this.sounds[i].push(this.sounds[i][0].cloneNode(true));
+              _results1.push(this.sounds[i][j].load());
             }
             return _results1;
           }).call(_this));

@@ -1,6 +1,8 @@
 
 class NAN.Game
-    constructor: ->
+    constructor: (music = true)->
+        if music
+            $.audioPlayerA.playString("0123456789")
         $.backgroundBlockId = 0
         @score = new NAN.Score
         @gridId = 0
@@ -125,6 +127,11 @@ class NAN.Game
 
         if not @paused
             @timeLeft -= 0.02
+        if @timeLeft < 5
+            $("#game-count-down").css("color", "#a44")
+        else
+            $("#game-count-down").css("color", "#454")
+        $("#game-count-down").html(Math.max(0, Math.floor(@timeLeft)))
 
         if @timeLeft < 0 and not @gameOver
             @over()
@@ -132,6 +139,7 @@ class NAN.Game
         $("#progressbar").attr("value", "#{@timeLeft / @timeTotal * 100}")
 
     over: ()->
+        $.audioPlayerA.playString("9876543210")
         delay = 2000
         @finalScore = @score.value
         @score.addValue(-@finalScore)
@@ -144,8 +152,26 @@ class NAN.Game
             =>
                 @score.addValue(@finalScore)
                 $(".score").fadeIn(500)
+#                $.audioPlayerB.playString(@finalScore.toString() + @finalScore.toString().split("").reverse().join(""))
             , delay
         )
+
+        setTimeout(
+            =>
+                $.audioPlayerA.playString(@finalScore.toString())
+                $.audioPlayerB.playString(@finalScore.toString())
+            , delay * 1.5
+        )
+
+
+@gameHint = (text)->
+    $("#game-area-hint").html(text)
+    $("#game-area-hint").fadeIn(250)
+    setTimeout(
+        ->
+            $("#game-area-hint").fadeOut(250)
+        , 1500
+    )
 
 @switchToNanScreen = ->
     new NAN.RotateTask("#nan-screen")
@@ -169,6 +195,18 @@ class NAN.Game
     if $.gameUpdater
         clearInterval($.gameUpdater)
     timeStep = 0.7
+    setTimeout(
+        ->
+            gameHint("连出你认为特殊的数字")
+        , 2500
+    )
+
+    setTimeout(
+        ->
+            gameHint("数字性质越特殊, 分数越高")
+        , 4600
+    )
+
     $(".square").remove()
     $("#number-show").hide()
     $("#number-show").css("opacity", "0.0")
@@ -185,18 +223,20 @@ class NAN.Game
         2000 * timeStep
     )
 
-$.dataServer = "http://59.66.130.206:3000/"
+#$.dataServer = "http://59.66.130.206:3000/"
+$.dataServer = "http://4.getwb.sinaapp.com/counter/"
 
 @queryNumber = (number, func, inc = 1)->
     cmd = ""
     console.log(inc)
     if inc == 1
-        cmd = "appear"
+        cmd = "inc.php"
     else
-        cmd = "query"
+        cmd = "check.php"
     $.ajax(
+#        timeout : 3000,
         type: "GET",
-        url: "#{$.dataServer}numbers/#{cmd}/#{number}"
+        url: "#{$.dataServer}#{cmd}?num=#{number}"
     ).done(
         (text)->
             if func
@@ -215,6 +255,7 @@ $.dataServer = "http://59.66.130.206:3000/"
     )
 
 @init = ()->
+    $("#game-area-hint").hide(0)
     $("#container").css("opacity", 0.0)
     $("#container").css("visibility", "visible")
     $("#container").animate({opacity: 1.0}, 1000)
@@ -238,8 +279,9 @@ $.dataServer = "http://59.66.130.206:3000/"
         
     $.audioPlayerA = new NAN.AudioPlayer("a")
     $.audioPlayerB = new NAN.AudioPlayer("b")
+    $.audioPlayerB.playString("02468")
     $.analyzer = new window.NAN.Analyzer
-    $.game = new NAN.Game
+    $.game = new NAN.Game(false)
     $.inTransition = false
     listenClick($("#game-over-hint"),
         =>

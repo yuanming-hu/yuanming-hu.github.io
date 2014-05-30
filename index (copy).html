@@ -9,18 +9,20 @@
     <script type="text/javascript" src="javascript/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="javascript/read-css.js"></script>
 
-    <script type="text/javascript" src="javascript/constants-min.js" charset="utf-8"> </script>
-    <script type="text/javascript" src="javascript/game-min.js" charset="utf-8"> </script>
-    <script type="text/javascript" src="javascript/analyzer-min.js" charset="utf-8"> </script>
-    <script type="text/javascript" src="javascript/grid-min.js" charset="utf-8"> </script>
-    <script type="text/javascript" src="javascript/mouse-min.js" charset="utf-8"> </script>
-    <script type="text/javascript" src="javascript/elements-min.js" charset="utf-8"> </script>
-    <script type="text/javascript" src="javascript/audioPlayer-min.js" charset="utf-8"> </script>
-    <script type="text/javascript" src="javascript/rotateTask-min.js" charset="utf-8"> </script>
+    <script type="text/javascript" src="javascript/constants.js" charset="utf-8"> </script>
+    <script type="text/javascript" src="javascript/game.js" charset="utf-8"> </script>
+    <script type="text/javascript" src="javascript/analyzer.js" charset="utf-8"> </script>
+    <script type="text/javascript" src="javascript/grid.js" charset="utf-8"> </script>
+    <script type="text/javascript" src="javascript/mouse.js" charset="utf-8"> </script>
+    <script type="text/javascript" src="javascript/elements.js" charset="utf-8"> </script>
+    <script type="text/javascript" src="javascript/audioPlayer.js" charset="utf-8"> </script>
+    <script type="text/javascript" src="javascript/rotateTask.js" charset="utf-8"> </script>
+
 </head>
 <body>
   <div id="title" style="position:relative;">
     <div id = "title-1" class = "title" style="color: #897; line-height: 80%; font-size: 192px; margin: 20px 0 0 0; text-shadow: 3px 3px 10px hsla(0, 0%, 0%, 0.2)">NAN</div>
+<!--     <div id = "title-3" class = "title" style="color: #585; line-height: 95%; font-size: 41px; text-shadow: 3px 3px 10px hsla(0, 0%, 0%, 0.2);">A Game for Nannan</div> -->
   </div>
   <div id="container"  class="board" style="margin: 30px auto; visibility: hidden">
     <div id="number-show" class="board">
@@ -45,12 +47,16 @@
       <div class="score" style="top:400px">
         0nan
       </div>
+
+<!--       <div id="game-over-nan" charset="UTF-8" style="background: url(background/old_map.png) repeat; color:#524; height: 35px; box-shadow: 0px 0px 5px #888; cursor: pointer;"> I'm Nannan...</div>
+ -->
       <div id="game-over-hint" charset="UTF-8" style="background: url(background/old_map.png) repeat; color:#524; height: 35px; box-shadow: 0px 0px 5px #888; cursor: pointer"> Play Again</div>
 
     </div>
 
     <div id="welcome-screen" class="board" style="z-index: 5002">
       <div style="font-size:130px; margin: 30px auto 0">数非数</div>
+<!--       <div style="font-size:48px; margin: 0px 0px 100px">给某人的生日礼物</div> -->
       <div style="font-size:48px; margin: 0px 0px 100px; height:50px"></div>
 
       <div style="font-size:34px; margin: 30px auto 10px">感谢基友们的测试与指导</div>

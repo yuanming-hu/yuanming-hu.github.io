@@ -57,7 +57,7 @@ class NAN.NumberSet
 		return 10 * Math.pow(n.length, 3)
 
 	logEvalutor: (n)->
-		return 30 + Math.pow(Math.log(parseInt(n)), 2.5)
+		return 30 + 5 * Math.pow(Math.log(parseInt(n)), 2.5)
 	
 	analyze: (n)->
 		result = {score: 1, description: ""}
@@ -138,12 +138,12 @@ class NAN.APNumberSet extends NAN.NumberSet
 	filter: (n)=>
 		if n.length < 3
 			return null
-		delta = -1
+		delta = -11
 		for i in [0...n.length - 1]
 			newDelta = (n[i + 1] - n[i])
 			if newDelta == 0
 				return null
-			if delta == -1
+			if delta == -10
 				delta = newDelta
 			else 
 				if delta != newDelta

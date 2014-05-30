@@ -91,7 +91,7 @@
     };
 
     NumberSet.prototype.logEvalutor = function(n) {
-      return 30 + Math.pow(Math.log(parseInt(n)), 2.5);
+      return 30 + 5 * Math.pow(Math.log(parseInt(n)), 2.5);
     };
 
     NumberSet.prototype.analyze = function(n) {
@@ -248,13 +248,13 @@
       if (n.length < 3) {
         return null;
       }
-      delta = -1;
+      delta = -11;
       for (i = _i = 0, _ref = n.length - 1; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
         newDelta = n[i + 1] - n[i];
         if (newDelta === 0) {
           return null;
         }
-        if (delta === -1) {
+        if (delta === -10) {
           delta = newDelta;
         } else {
           if (delta !== newDelta) {

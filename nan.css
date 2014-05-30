@@ -100,10 +100,10 @@ body {
 #game-over-hint {
     font-size: 1.6em;
     color: #060;
-    width: 600px;
-    margin: auto auto 20px;
+    width: 560px;
+    left: 20px;
     position: absolute;
-    bottom: -0.2em;
+    bottom: 20px;
     text-align: center;
 }
 
@@ -111,10 +111,10 @@ body {
 #game-over-nan {
     font-size: 1.6em;
     color: #060;
-    width: 600px;
-    margin: auto auto 20px;
+    width: 560px;
+    left: 20px;
     position: absolute;
-    bottom: 1.4em;
+    bottom: 65px;
     text-align: center;
 }
 
@@ -131,14 +131,6 @@ progress {
 
 progress[value]::-webkit-progress-value {
     background-image:
-    /*
-       -webkit-linear-gradient(-45deg, 
-                               transparent 33%, rgba(0, 0, 0, .1) 33%, 
-                               rgba(0,0, 0, .1) 66%, transparent 66%),
-       -webkit-linear-gradient(top, 
-                               rgba(255, 255, 255, .25), 
-                               rgba(0, 0, 0, .25)),
-    */
     -webkit-linear-gradient(left, hsl(140, 54%, 70%), hsl(140, 54%, 70%));
     border-radius: 20px; 
     background-size: auto 20px, 100% 100%, 100% 100%;

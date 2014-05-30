@@ -188,7 +188,7 @@
     };
 
     Grid.prototype.makeSound = function() {
-      return $.audioPlayerA.play(this.value, 0.3);
+      return $.audioPlayerA.play(this.value, 0.2);
     };
 
     Grid.prototype.mouseOver = function() {

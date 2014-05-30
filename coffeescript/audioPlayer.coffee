@@ -17,7 +17,7 @@ class NAN.AudioTask
 		return
 
 	play: ()->
-		@audioPlayer.play(@n, 0.3)
+		@audioPlayer.play(@n, 1.0)
 
 
 
@@ -29,18 +29,18 @@ class NAN.AudioPlayer
 		@sounds = [[]]
 		@copies = 8
 		@pointer = []
-		for i in [0...10]
-			@pointer[i] = 0
-			@sounds[i] = []
-			@sounds[i][0] = new Audio("sound/sound#{i}#{suffix}.mp3")
-			@sounds[i][0].load()
 #			document.body.appendChild(@sounds[i][0])
 
 		setTimeout(
 			=>
 				for i in [0...10]
+					@pointer[i] = 0
+					@sounds[i] = []
+					@sounds[i][0] = new Audio("sound/sound#{i}#{suffix}.mp3")
+					@sounds[i][0].load()
 					for j in [1...@copies]
 						@sounds[i].push(@sounds[i][0].cloneNode(true))
+						@sounds[i][j].load()
 			, 0
 		)
 

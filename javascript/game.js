@@ -3,8 +3,14 @@
 
   NAN.Game = (function() {
 
-    function Game() {
+    function Game(music) {
       var i, _i, _ref;
+      if (music == null) {
+        music = true;
+      }
+      if (music) {
+        $.audioPlayerA.playString("0123456789");
+      }
       $.backgroundBlockId = 0;
       this.score = new NAN.Score;
       this.gridId = 0;
@@ -200,6 +206,12 @@
       if (!this.paused) {
         this.timeLeft -= 0.02;
       }
+      if (this.timeLeft < 5) {
+        $("#game-count-down").css("color", "#a44");
+      } else {
+        $("#game-count-down").css("color", "#454");
+      }
+      $("#game-count-down").html(Math.max(0, Math.floor(this.timeLeft)));
       if (this.timeLeft < 0 && !this.gameOver) {
         this.over();
       }
@@ -209,6 +221,7 @@
     Game.prototype.over = function() {
       var delay,
         _this = this;
+      $.audioPlayerA.playString("9876543210");
       delay = 2000;
       this.finalScore = this.score.value;
       this.score.addValue(-this.finalScore);
@@ -217,15 +230,27 @@
       if (this.timeLeft >= 0) {
         $(".score").fadeOut(500);
       }
-      return setTimeout(function() {
+      setTimeout(function() {
         _this.score.addValue(_this.finalScore);
         return $(".score").fadeIn(500);
       }, delay);
+      return setTimeout(function() {
+        $.audioPlayerA.playString(_this.finalScore.toString());
+        return $.audioPlayerB.playString(_this.finalScore.toString());
+      }, delay * 1.5);
     };
 
     return Game;
 
   })();
+
+  this.gameHint = function(text) {
+    $("#game-area-hint").html(text);
+    $("#game-area-hint").fadeIn(250);
+    return setTimeout(function() {
+      return $("#game-area-hint").fadeOut(250);
+    }, 1500);
+  };
 
   this.switchToNanScreen = function() {
     new NAN.RotateTask("#nan-screen");
@@ -247,6 +272,12 @@
       clearInterval($.gameUpdater);
     }
     timeStep = 0.7;
+    setTimeout(function() {
+      return gameHint("连出你认为特殊的数字");
+    }, 2500);
+    setTimeout(function() {
+      return gameHint("数字性质越特殊, 分数越高");
+    }, 4600);
     $(".square").remove();
     $("#number-show").hide();
     $("#number-show").css("opacity", "0.0");
@@ -258,7 +289,7 @@
     }, 2000 * timeStep);
   };
 
-  $.dataServer = "http://59.66.130.206:3000/";
+  $.dataServer = "http://4.getwb.sinaapp.com/counter/";
 
   this.queryNumber = function(number, func, inc) {
     var cmd;
@@ -268,13 +299,13 @@
     cmd = "";
     console.log(inc);
     if (inc === 1) {
-      cmd = "appear";
+      cmd = "inc.php";
     } else {
-      cmd = "query";
+      cmd = "check.php";
     }
     return $.ajax({
       type: "GET",
-      url: "" + $.dataServer + "numbers/" + cmd + "/" + number
+      url: "" + $.dataServer + cmd + "?num=" + number
     }).done(function(text) {
       if (func) {
         return func(text);
@@ -294,6 +325,7 @@
 
   this.init = function() {
     var _this = this;
+    $("#game-area-hint").hide(0);
     $("#container").css("opacity", 0.0);
     $("#container").css("visibility", "visible");
     $("#container").animate({
@@ -316,8 +348,9 @@
     }
     $.audioPlayerA = new NAN.AudioPlayer("a");
     $.audioPlayerB = new NAN.AudioPlayer("b");
+    $.audioPlayerB.playString("02468");
     $.analyzer = new window.NAN.Analyzer;
-    $.game = new NAN.Game;
+    $.game = new NAN.Game(false);
     $.inTransition = false;
     listenClick($("#game-over-hint"), function() {
       if (!$.inTransition) {
