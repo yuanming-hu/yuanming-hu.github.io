@@ -481,6 +481,28 @@ class NAN.meaningfulNumberSet extends NAN.NumberSet
 			description: "就知道23",
 			score: 20
 
+
+		@newNumber
+			number: 365,
+			description: "平年的天数",
+			score: 20
+
+		@newNumber
+			number: 366,
+			description: "润年的天数",
+			score: 20
+
+		@newNumber
+			number: 86400,
+			description: "一天的秒数",
+			score: 20
+
+		@newNumber
+			number: 3600,
+			description: "一天的分钟数",
+			score: 20
+
+
 	newNumber: (num)->
 		@numbers.push
 			number: num.number,
