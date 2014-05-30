@@ -7,7 +7,7 @@ class NAN.Mouse
     checkPath: ()->
         result = true
         if @path.length < 2
-            gameHint("请拖动来选择多个数字")
+            gameHint("请拖动来选择2到8个数字")
             result = false
         if @path.length > 0
             for i in [0...(@path.length - 1)]
@@ -58,6 +58,7 @@ class NAN.Mouse
 
     addGrid: (grid)->
         if @path.length >= 8
+            gameHint("最长只能是8个数字T_T")
             return
         if @path.length == 0 and grid.value == 0
             gameHint("不能以0开始哦")

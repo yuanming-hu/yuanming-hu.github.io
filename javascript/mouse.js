@@ -12,7 +12,7 @@
       var i, result, _i, _ref;
       result = true;
       if (this.path.length < 2) {
-        gameHint("请拖动来选择多个数字");
+        gameHint("请拖动来选择2到8个数字");
         result = false;
       }
       if (this.path.length > 0) {
@@ -83,6 +83,7 @@
     Mouse.prototype.addGrid = function(grid) {
       var inside, node, _i, _len, _ref;
       if (this.path.length >= 8) {
+        gameHint("最长只能是8个数字T_T");
         return;
       }
       if (this.path.length === 0 && grid.value === 0) {
