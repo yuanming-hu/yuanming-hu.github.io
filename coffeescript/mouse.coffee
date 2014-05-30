@@ -7,6 +7,7 @@ class NAN.Mouse
     checkPath: ()->
         result = true
         if @path.length < 2
+            gameHint("请拖动来选择多个数字")
             result = false
         if @path.length > 0
             for i in [0...(@path.length - 1)]

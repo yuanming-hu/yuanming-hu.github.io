@@ -12,6 +12,7 @@
       var i, result, _i, _ref;
       result = true;
       if (this.path.length < 2) {
+        gameHint("请拖动来选择多个数字");
         result = false;
       }
       if (this.path.length > 0) {
