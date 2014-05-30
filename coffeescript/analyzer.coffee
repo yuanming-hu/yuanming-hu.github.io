@@ -387,6 +387,17 @@ class NAN.meaningfulNumberSet extends NAN.NumberSet
 			description: "南南的生日",
 			score: 200
 
+
+		@newNumber
+			number: 950603,
+			description: "南南的生日",
+			score: 1000
+
+		@newNumber
+			number: 19950603,
+			description: "南南的生日",
+			score: 10000
+
 		@newNumber
 			number: 60,
 			description: "谢老师不挂之恩",
@@ -489,7 +500,7 @@ class NAN.meaningfulNumberSet extends NAN.NumberSet
 
 		@newNumber
 			number: 366,
-			description: "润年的天数",
+			description: "闰年的天数",
 			score: 20
 
 		@newNumber

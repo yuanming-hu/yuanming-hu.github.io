@@ -686,6 +686,16 @@
         score: 200
       });
       this.newNumber({
+        number: 950603,
+        description: "南南的生日",
+        score: 1000
+      });
+      this.newNumber({
+        number: 19950603,
+        description: "南南的生日",
+        score: 10000
+      });
+      this.newNumber({
         number: 60,
         description: "谢老师不挂之恩",
         score: 70
@@ -782,7 +792,7 @@
       });
       this.newNumber({
         number: 366,
-        description: "润年的天数",
+        description: "闰年的天数",
         score: 20
       });
       this.newNumber({
