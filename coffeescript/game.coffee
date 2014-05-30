@@ -295,7 +295,13 @@ $.dataServer = "http://4.getwb.sinaapp.com/counter/"
                 newGame()
     )
 
-
+    
+    listenClick(
+        $("#game-over-share"),
+        =>
+            window.open("http://share.renren.com/share/buttonshare.do?link=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F&title=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F")
+    )
+    
     listenClick(
         $("#nan-screen"),
         =>

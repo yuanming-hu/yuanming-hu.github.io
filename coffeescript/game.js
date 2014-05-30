@@ -204,7 +204,7 @@
         }
       }
       if (!this.paused) {
-        this.timeLeft -= 0.02;
+        this.timeLeft -= 2;
       }
       if (this.timeLeft < 5) {
         $("#game-count-down").css("color", "#a44");

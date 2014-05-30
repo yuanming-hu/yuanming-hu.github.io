@@ -118,6 +118,17 @@ body {
     text-align: center;
 }
 
+#game-over-share {
+    font-size: 1.6em;
+    color: #060;
+    width: 560px;
+    left: 20px;
+    position: absolute;
+    bottom: 65px;
+    text-align: center;
+}
+
+
 #game-over-screen {
     position: absolute;
 }
