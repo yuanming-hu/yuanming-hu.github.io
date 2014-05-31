@@ -8,6 +8,9 @@
     if (navigator.appVersion.indexOf("iOS") !== -1) {
       return true;
     }
+    if (navigator.appVersion.indexOf("iPhone") !== -1) {
+      return true;
+    }
     if (navigator.appVersion.indexOf("Android") !== -1) {
       return true;
     }
