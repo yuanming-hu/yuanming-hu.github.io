@@ -344,6 +344,9 @@
     $.currentScreen = "#welcome-screen";
     $.mobileMode = mobileMode();
     if ($.mobileMode) {
+      queryNumber(-3);
+    }
+    if ($.mobileMode) {
       setStyleRuleValue(".square:hover", "border-radius", "20%");
     }
     $.audioPlayerA = new NAN.AudioPlayer("a");
@@ -363,7 +366,8 @@
       }
     });
     listenClick($("#game-over-share"), function() {
-      return window.open("http://share.renren.com/share/buttonshare.do?link=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F&title=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F");
+      window.open("http://share.renren.com/share/buttonshare.do?link=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F&title=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F");
+      return queryNumber(-2);
     });
     listenClick($("#nan-screen"), function() {
       if (!$.inTransition) {

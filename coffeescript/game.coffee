@@ -275,6 +275,9 @@ $.dataServer = "http://4.getwb.sinaapp.com/counter/"
     $.currentScreen = "#welcome-screen"
     $.mobileMode = mobileMode()
     if $.mobileMode
+        queryNumber(-3)
+
+    if $.mobileMode
         setStyleRuleValue(".square:hover", "border-radius", "20%")
         
     $.audioPlayerA = new NAN.AudioPlayer("a")
@@ -300,6 +303,7 @@ $.dataServer = "http://4.getwb.sinaapp.com/counter/"
         $("#game-over-share"),
         =>
             window.open("http://share.renren.com/share/buttonshare.do?link=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F&title=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F")
+            queryNumber(-2)
     )
     
     listenClick(
