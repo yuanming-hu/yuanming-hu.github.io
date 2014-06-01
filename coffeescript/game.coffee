@@ -145,8 +145,8 @@ class NAN.Game
         if $.gameMode in [$.modeClassic, $.modeAdvanced]
             if not @paused
                 @timeLeft -= 0.02
-            if timeLeft > 60
-                timeLeft = 60
+            if @timeLeft > 60
+                @timeLeft = 60
             if @timeLeft < 5
                 $("#game-count-down").css("color", "#f44")
             else
@@ -169,7 +169,7 @@ class NAN.Game
             $.numberShow.onClick()
         $.audioPlayerA.playString("9876543210")
         delay = 2000
-        @finalScore = @score.value
+        @finalScore = Math.floor(@score.value)
         @score.addValue(-@finalScore)
         new NAN.RotateTask("#game-over-screen", -1)
 #        if @timeLeft >= 0
@@ -177,6 +177,7 @@ class NAN.Game
         if $.gameMode == $.modeOCD
             ratio = 3 / (3 + @gridQueue.length)
             @finalScore *= ratio
+            @finalScore = Math.floor(@finalScore)
             prefix = ""
             if @gridQueue.length == 0
                 prefix = "消除了全部方块"
@@ -200,6 +201,16 @@ class NAN.Game
                 $.audioPlayerB.playString(@finalScore.toString())
             , delay * 1.5
         )
+
+
+        rrShareParam = {
+            resourceUrl : 'http://iteratoradvance.github.io/', 
+            srcUrl : 'http://iteratoradvance.github.io/',
+            pic : '',
+            title : 'Not A Number! 发现隐藏在数字中的秘密! 4种游戏模式供您选择, 挑战你的数学直觉!',
+            description : "我在[#{$.modeChinese[$.gameMode]}]中获得 [#{$.shareScore}] 分, 快来和我一比高下吧!"
+        }
+        $("#game-over-share-anchor").attr("href", rrGetUrl(rrShareParam))
 
 
 @gameHint = (text)->
@@ -380,7 +391,7 @@ $.dataServer = "http://4.getwb.sinaapp.com/counter/"
                 newGame()
     )
 
-    
+    ###
     listenClick(
         $("#game-over-share"),
         =>
@@ -395,6 +406,7 @@ $.dataServer = "http://4.getwb.sinaapp.com/counter/"
 #            window.open("http://share.renren.com/share/buttonshare.do?link=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F&title=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F")
             queryNumber(-2)
     )
+    ###
     
     listenClick(
         $("#nan-screen"),
