@@ -11,6 +11,7 @@ class NAN.Game
                         gameHint("如果不想玩了或者没有数可以消除, 可以点击右上角的结束游戏")
                     , 15000
                 )
+            queryNumber(-10, null, 1)
 
         $.backgroundBlockId = 0
         @score = new NAN.Score
@@ -391,6 +392,15 @@ $.dataServer = "http://4.getwb.sinaapp.com/counter/"
                 newGame()
     )
 
+    ###
+    listenClick(
+        $("#game-over-share"),
+        =>
+            $("#game-over-share").click()
+            alert(123)
+    )
+    ###
+    
     ###
     listenClick(
         $("#game-over-share"),
