@@ -237,10 +237,6 @@
     Game.prototype.over = function() {
       var delay, prefix, ratio,
         _this = this;
-      $("#game-over-mode-hint").html($.modeChinese[$.gameMode]);
-      if ($.numberShow && !$.numberShow.finished) {
-        $.numberShow.onClick();
-      }
       $.audioPlayerA.playString("9876543210");
       delay = 2000;
       this.finalScore = this.score.value;
@@ -248,7 +244,7 @@
       this.gameOver = true;
       new NAN.RotateTask("#game-over-screen", -1);
       $(".score").fadeOut(500);
-      if ($.gameMode === $.modeOCD) {
+      if ($.mode === $.modeOCD) {
         ratio = 3 / (3 + this.gridQueue.length);
         this.finalScore *= ratio;
         prefix = "";
@@ -257,7 +253,7 @@
         } else {
           prefix = "剩余" + this.gridQueue.length + "个方块";
         }
-        $("#ocd-hint").html("" + prefix + ", 获得" + (Math.floor(ratio * 100)) + "%分数");
+        $("#ocd-hint").hint("" + prefix + ", 分数为" + (Math.floor(ratio * 100)) + "%");
       }
       setTimeout(function() {
         _this.score.addValue(_this.finalScore);
@@ -295,7 +291,7 @@
     var timeStep;
     $("#number-show").hide(0);
     $("#game-area").hide(0);
-    if ($.gameMode !== $.modeOCD) {
+    if ($.mode !== $.modeOCD) {
       $("#ocd-hint").hide(0);
     } else {
       $("#ocd-hint").show(0);

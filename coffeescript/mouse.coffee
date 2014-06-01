@@ -37,8 +37,13 @@ class NAN.Mouse
                         return desc != null and desc != ""
                     ).join("<br>")
             if result.score == 0 # and descriptions == ""
+                if $.gameMode == $.modeAdvanced
+                    $.game.timeLeft -= 2
                 gameHint("这只是一个平凡的数, 放了它吧")
             else
+                if $.gameMode == $.modeAdvanced
+                    $.game.timeLeft += 1
+
                 $.numberShow = new NAN.NumberShow
                     n: numberString,
                     descriptions: descriptions,

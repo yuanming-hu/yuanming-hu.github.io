@@ -78,10 +78,11 @@ class NAN.Game
                         @grids[x - 1][y].moveTo(x, y)
                         @grids[x - 1][y] = null
                     else if x == 0
-                        @newGrid(x, y, false)
-                        @gridsToShow.push(@grids[x][y])
-                        @grids[x][y].getElement().hide()
-                        @grids[x][y].getElement().css("opacity", 0.0)
+                        if $.gameMode != $.modeOCD
+                            @newGrid(x, y, false)
+                            @gridsToShow.push(@grids[x][y])
+                            @grids[x][y].getElement().hide()
+                            @grids[x][y].getElement().css("opacity", 0.0)
 
     updateGrids: () ->
         newQueue = []
@@ -125,28 +126,48 @@ class NAN.Game
             if $.numberShow.finished
                 $.numberShow = null
 
-        if not @paused
-            @timeLeft -= 0.02
-        if @timeLeft < 5
-            $("#game-count-down").css("color", "#a44")
-        else
-            $("#game-count-down").css("color", "#454")
-        $("#game-count-down").html(Math.max(0, Math.floor(@timeLeft)))
-
-        if @timeLeft < 0 and not @gameOver
-            @over()
+        @updateTimeLeft()
 
         $("#progressbar").attr("value", "#{@timeLeft / @timeTotal * 100}")
 
+    updateTimeLeft: ()->
+        if $.gameMode in [$.modeClassic, $.modeAdvanced]
+            if not @paused
+                @timeLeft -= 0.02
+            if timeLeft > 60
+                timeLeft = 60
+            if @timeLeft < 5
+                $("#game-count-down").css("color", "#f44")
+            else
+                $("#game-count-down").css("color", "#454")
+
+            $("#game-count-down").html(Math.max(0, Math.floor(@timeLeft)))
+            if @timeLeft <= 0 and not @gameOver
+                @over()
+        else 
+            $("#game-count-down").html("NaN")
+
     over: ()->
+        $("#game-over-mode-hint").html($.modeChinese[$.gameMode])
+        if $.numberShow and not $.numberShow.finished
+            $.numberShow.onClick()
         $.audioPlayerA.playString("9876543210")
         delay = 2000
         @finalScore = @score.value
         @score.addValue(-@finalScore)
         @gameOver = true
         new NAN.RotateTask("#game-over-screen", -1)
-        if @timeLeft >= 0
-            $(".score").fadeOut(500)
+#        if @timeLeft >= 0
+        $(".score").fadeOut(500)
+        if $.gameMode == $.modeOCD
+            ratio = 3 / (3 + @gridQueue.length)
+            @finalScore *= ratio
+            prefix = ""
+            if @gridQueue.length == 0
+                prefix = "消除了全部方块"
+            else
+                prefix = "剩余#{@gridQueue.length}个方块"
+            $("#ocd-hint").html("#{prefix}, 获得#{Math.floor(ratio * 100)}%分数")
 
         setTimeout(
             =>
@@ -190,6 +211,10 @@ class NAN.Game
 @newGame = ->
     $("#number-show").hide(0)
     $("#game-area").hide(0)
+    if $.gameMode != $.modeOCD
+        $("#ocd-hint").hide(0)
+    else
+        $("#ocd-hint").show(0)
     new NAN.RotateTask("#game-area")
     $.game = new NAN.Game
     if $.gameUpdater
@@ -254,7 +279,15 @@ $.dataServer = "http://4.getwb.sinaapp.com/counter/"
             func()
     )
 
+@changeMode = (mode)->
+    $.gameMode = mode
+    $("#mod-explanation").html($.modeExplanations[mode])
+    $("#game-mode-hint").html($.modeChinese[mode])
+
+
 @init = ()->
+    $("#number-show").hide(0)
+    $("#game-area").hide(0)
     $("#game-area-hint").hide(0)
     $("#container").css("opacity", 0.0)
     $("#container").css("visibility", "visible")
@@ -286,6 +319,37 @@ $.dataServer = "http://4.getwb.sinaapp.com/counter/"
     $.analyzer = new window.NAN.Analyzer
     $.game = new NAN.Game(false)
     $.inTransition = false
+    $.modeClassic = "classic"
+    $.modeAdvanced = "advanced"
+    $.modeOCD = "OCD"
+    $.modeEndless = "endless"
+    $.gameModes = [$.modeClassic, $.modeAdvanced, $.modeOCD, $.modeEndless]
+    $.gameMode = $.modeClassic
+    $.modeExplanations = []
+    $.modeChinese = []
+    $.modeChinese[$.modeClassic] = "经典模式"
+    $.modeChinese[$.modeAdvanced] = "进阶模式"
+    $.modeChinese[$.modeOCD] = "强迫模式"
+    $.modeChinese[$.modeEndless] = "无尽模式"
+    $.modeExplanations[$.modeClassic] = "在60s内获得尽可能高的分数"
+    $.modeExplanations[$.modeAdvanced] = "时间限制60s, 得到有意义的数加1秒, 否则减2秒"
+    $.modeExplanations[$.modeOCD] = "方块不会补充, 必须消除全部方块, 否则分数大打折扣"
+    $.modeExplanations[$.modeEndless] = "没有任何限制, 任君体验"
+    changeMode($.modeClassic)
+#    console.log($.modeExplanations)
+    for mode in $.gameModes
+        generator = (mode)->
+            ()->
+                changeMode(mode)
+                return false
+
+
+        listenClick(
+            $("#mod-select-#{mode}"),
+            generator(mode)
+        )
+
+
     listenClick($("#game-over-hint"),
         =>
             if not $.inTransition
@@ -319,7 +383,17 @@ $.dataServer = "http://4.getwb.sinaapp.com/counter/"
             if not $.inTransition
                 switchToNanScreen()
     )
+    listenClick(
+        $("#manual-game-over"),
+        =>
+            $.game.over()
+    )
 
+    listenClick(
+        $("#game-over-other"),
+        =>
+            new NAN.RotateTask("#welcome-screen", -1)
+    )
 
     $("body").mouseup(
         ->
