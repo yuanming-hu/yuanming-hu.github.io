@@ -1,7 +1,12 @@
 
 * {
-    font-family: 'Open Sans', '微软雅黑', 'Microsoft YaHei', '黑体', sans-serif;
+    font-family: openSans, '微软雅黑', 'Microsoft YaHei', '黑体', sans-serif;
     font-weight: 300
+}
+
+@font-face {
+    font-family: openSans;
+    src: url(opensans.ttf);
 }
 
 body {
