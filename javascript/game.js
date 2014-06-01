@@ -3,13 +3,20 @@
 
   NAN.Game = (function() {
 
-    function Game(music) {
-      var i, _i, _ref;
-      if (music == null) {
-        music = true;
+    function Game(instance) {
+      var i, _i, _ref, _ref1;
+      if (instance == null) {
+        instance = true;
       }
-      if (music) {
+      this.hint = 0;
+      if (instance) {
         $.audioPlayerA.playString("0123456789");
+        this.hintEvent = 0;
+        if ((_ref = $.gameMode) === $.modeOCD || _ref === $.modeEndless) {
+          this.hint = setInterval(function() {
+            return gameHint("如果不想玩了或者没有数可以消除, 可以点击右上角的结束游戏");
+          }, 15000);
+        }
       }
       $.backgroundBlockId = 0;
       this.score = new NAN.Score;
@@ -37,7 +44,7 @@
       this.timeLeft = 60;
       this.timeTotal = 60;
       this.gridQueue = [];
-      for (i = _i = 0, _ref = this.numGridRows; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+      for (i = _i = 0, _ref1 = this.numGridRows; 0 <= _ref1 ? _i < _ref1 : _i > _ref1; i = 0 <= _ref1 ? ++_i : --_i) {
         this.grids[i] = [];
       }
       this.startTime = getTime();
@@ -208,6 +215,9 @@
         }
       }
       this.updateTimeLeft();
+      if ($.gameMode === $.modeOCD && this.gridQueue.length <= 1) {
+        this.over();
+      }
       return $("#progressbar").attr("value", "" + (this.timeLeft / this.timeTotal * 100));
     };
 
@@ -226,7 +236,7 @@
           $("#game-count-down").css("color", "#454");
         }
         $("#game-count-down").html(Math.max(0, Math.floor(this.timeLeft)));
-        if (this.timeLeft <= 0 && !this.gameOver) {
+        if (this.timeLeft <= 0) {
           return this.over();
         }
       } else {
@@ -237,6 +247,13 @@
     Game.prototype.over = function() {
       var delay, prefix, ratio,
         _this = this;
+      if (this.gameOver) {
+        return;
+      }
+      this.gameOver = true;
+      if (this.hint) {
+        clearInterval(this.hint);
+      }
       $("#game-over-mode-hint").html($.modeChinese[$.gameMode]);
       if ($.numberShow && !$.numberShow.finished) {
         $.numberShow.onClick();
@@ -245,7 +262,6 @@
       delay = 2000;
       this.finalScore = this.score.value;
       this.score.addValue(-this.finalScore);
-      this.gameOver = true;
       new NAN.RotateTask("#game-over-screen", -1);
       $(".score").fadeOut(500);
       if ($.gameMode === $.modeOCD) {
@@ -275,10 +291,10 @@
 
   this.gameHint = function(text) {
     $("#game-area-hint").html(text);
-    $("#game-area-hint").fadeIn(250);
+    $("#game-area-hint").fadeIn(150);
     return setTimeout(function() {
-      return $("#game-area-hint").fadeOut(250);
-    }, 1500);
+      return $("#game-area-hint").fadeOut(150);
+    }, 2200);
   };
 
   this.switchToNanScreen = function() {
@@ -306,7 +322,7 @@
     }, 2500);
     setTimeout(function() {
       return gameHint("数字性质越特殊, 分数越高");
-    }, 4600);
+    }, 5100);
     $(".square").remove();
     $("#number-show").hide();
     $("#number-show").css("opacity", "0.0");
@@ -354,7 +370,7 @@
 
   this.changeMode = function(mode) {
     $.gameMode = mode;
-    $("#mod-explanation").html($.modeExplanations[mode]);
+    $("#mod-explanation").html($.modeChinese[mode] + "<br>" + $.modeExplanations[mode]);
     $("#game-mode-hint").html($.modeChinese[mode]);
     if ($.gameMode !== $.modeOCD) {
       return $("#ocd-hint").hide(0);

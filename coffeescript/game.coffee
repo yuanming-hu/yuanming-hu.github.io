@@ -1,8 +1,17 @@
 
 class NAN.Game
-    constructor: (music = true)->
-        if music
+    constructor: (instance = true)->
+        @hint = 0
+        if instance
             $.audioPlayerA.playString("0123456789")
+            @hintEvent = 0
+            if $.gameMode in [$.modeOCD, $.modeEndless]
+                @hint = setInterval(
+                    ->
+                        gameHint("如果不想玩了或者没有数可以消除, 可以点击右上角的结束游戏")
+                    , 15000
+                )
+
         $.backgroundBlockId = 0
         @score = new NAN.Score
         @gridId = 0
@@ -127,6 +136,8 @@ class NAN.Game
                 $.numberShow = null
 
         @updateTimeLeft()
+        if $.gameMode == $.modeOCD and @gridQueue.length <= 1
+            @over()
 
         $("#progressbar").attr("value", "#{@timeLeft / @timeTotal * 100}")
 
@@ -142,12 +153,17 @@ class NAN.Game
                 $("#game-count-down").css("color", "#454")
 
             $("#game-count-down").html(Math.max(0, Math.floor(@timeLeft)))
-            if @timeLeft <= 0 and not @gameOver
+            if @timeLeft <= 0
                 @over()
         else 
             $("#game-count-down").html("NaN")
 
     over: ()->
+        if @gameOver
+            return
+        @gameOver = true
+        if @hint
+            clearInterval(@hint)
         $("#game-over-mode-hint").html($.modeChinese[$.gameMode])
         if $.numberShow and not $.numberShow.finished
             $.numberShow.onClick()
@@ -155,7 +171,6 @@ class NAN.Game
         delay = 2000
         @finalScore = @score.value
         @score.addValue(-@finalScore)
-        @gameOver = true
         new NAN.RotateTask("#game-over-screen", -1)
 #        if @timeLeft >= 0
         $(".score").fadeOut(500)
@@ -187,11 +202,11 @@ class NAN.Game
 
 @gameHint = (text)->
     $("#game-area-hint").html(text)
-    $("#game-area-hint").fadeIn(250)
+    $("#game-area-hint").fadeIn(150)
     setTimeout(
         ->
-            $("#game-area-hint").fadeOut(250)
-        , 1500
+            $("#game-area-hint").fadeOut(150)
+        , 2200
     )
 
 @switchToNanScreen = ->
@@ -225,7 +240,7 @@ class NAN.Game
     setTimeout(
         ->
             gameHint("数字性质越特殊, 分数越高")
-        , 4600
+        , 5100
     )
 
     $(".square").remove()
@@ -277,7 +292,7 @@ $.dataServer = "http://4.getwb.sinaapp.com/counter/"
 
 @changeMode = (mode)->
     $.gameMode = mode
-    $("#mod-explanation").html($.modeExplanations[mode])
+    $("#mod-explanation").html($.modeChinese[mode] + "<br>" + $.modeExplanations[mode])
     $("#game-mode-hint").html($.modeChinese[mode])
     if $.gameMode != $.modeOCD
         $("#ocd-hint").hide(0)
