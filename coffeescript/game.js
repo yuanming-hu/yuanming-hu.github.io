@@ -246,7 +246,7 @@
     };
 
     Game.prototype.over = function() {
-      var delay, prefix, ratio, rrShareParam,
+      var delay, prefix, ratio,
         _this = this;
       if (this.gameOver) {
         return;
@@ -286,19 +286,24 @@
         $.audioPlayerA.playString(_this.finalScore.toString());
         return $.audioPlayerB.playString(_this.finalScore.toString());
       }, delay * 1.5);
-      rrShareParam = {
-        resourceUrl: 'http://iteratoradvance.github.io/',
-        srcUrl: 'http://iteratoradvance.github.io/',
-        pic: '',
-        title: 'Not A Number! 发现隐藏在数字中的秘密! 4种游戏模式供您选择, 挑战你的数学直觉!',
-        description: "我在[" + $.modeChinese[$.gameMode] + "]中获得 [" + $.shareScore + "] 分, 快来和我一比高下吧!"
-      };
-      return $("#game-over-share-anchor").attr("href", rrGetUrl(rrShareParam));
+      return $("#game-over-share-anchor").attr("href", getRenrenShareUrl());
     };
 
     return Game;
 
   })();
+
+  this.getRenrenShareUrl = function() {
+    var rrShareParam;
+    rrShareParam = {
+      resourceUrl: 'http://iteratoradvance.github.io/',
+      srcUrl: 'http://iteratoradvance.github.io/',
+      pic: '',
+      title: 'Not A Number! 发现隐藏在数字中的秘密! 4种游戏模式供您选择, 挑战你的数学直觉!',
+      description: "我在[" + $.modeChinese[$.gameMode] + "]中获得 [" + $.shareScore + "] 分, 快来和我一比高下吧!"
+    };
+    return rrGetUrl(rrShareParam);
+  };
 
   this.gameHint = function(text) {
     $("#game-area-hint").html(text);
@@ -463,32 +468,11 @@
         return newGame();
       }
     });
-    /*
-        listenClick(
-            $("#game-over-share"),
-            =>
-                $("#game-over-share").click()
-                alert(123)
-        )
-    */
-
-    /*
-        listenClick(
-            $("#game-over-share"),
-            =>
-                rrShareParam = {
-                        resourceUrl : 'http://iteratoradvance.github.io/', 
-                        srcUrl : 'http://iteratoradvance.github.io/',
-                        pic : '',
-                        title : 'Not A Number! 发现隐藏在数字中的秘密! 4种游戏模式供您选择, 挑战你的数学直觉!',
-                        description : "我在[#{$.modeChinese[$.gameMode]}]中获得 [#{$.shareScore}] 分, 快来和我一比高下吧!"
-                    }
-                rrShareOnclick(rrShareParam);
-    #            window.open("http://share.renren.com/share/buttonshare.do?link=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F&title=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F")
-                queryNumber(-2)
-        )
-    */
-
+    if ($.mobileMode) {
+      listenClick($("#game-over-share"), function() {
+        return window.open(getRenrenShareUrl());
+      });
+    }
     listenClick($("#nan-screen"), function() {
       if (!$.inTransition) {
         return newGame();
