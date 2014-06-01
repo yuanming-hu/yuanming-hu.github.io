@@ -295,11 +295,6 @@
     var timeStep;
     $("#number-show").hide(0);
     $("#game-area").hide(0);
-    if ($.gameMode !== $.modeOCD) {
-      $("#ocd-hint").hide(0);
-    } else {
-      $("#ocd-hint").show(0);
-    }
     new NAN.RotateTask("#game-area");
     $.game = new NAN.Game;
     if ($.gameUpdater) {
@@ -360,7 +355,12 @@
   this.changeMode = function(mode) {
     $.gameMode = mode;
     $("#mod-explanation").html($.modeExplanations[mode]);
-    return $("#game-mode-hint").html($.modeChinese[mode]);
+    $("#game-mode-hint").html($.modeChinese[mode]);
+    if ($.gameMode !== $.modeOCD) {
+      return $("#ocd-hint").hide(0);
+    } else {
+      return $("#ocd-hint").show(0);
+    }
   };
 
   this.init = function() {

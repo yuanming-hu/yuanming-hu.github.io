@@ -211,10 +211,6 @@ class NAN.Game
 @newGame = ->
     $("#number-show").hide(0)
     $("#game-area").hide(0)
-    if $.gameMode != $.modeOCD
-        $("#ocd-hint").hide(0)
-    else
-        $("#ocd-hint").show(0)
     new NAN.RotateTask("#game-area")
     $.game = new NAN.Game
     if $.gameUpdater
@@ -283,6 +279,11 @@ $.dataServer = "http://4.getwb.sinaapp.com/counter/"
     $.gameMode = mode
     $("#mod-explanation").html($.modeExplanations[mode])
     $("#game-mode-hint").html($.modeChinese[mode])
+    if $.gameMode != $.modeOCD
+        $("#ocd-hint").hide(0)
+    else
+        $("#ocd-hint").show(0)
+
 
 
 @init = ()->
