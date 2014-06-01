@@ -3,13 +3,20 @@
 
   NAN.Game = (function() {
 
-    function Game(music) {
-      var i, _i, _ref;
-      if (music == null) {
-        music = true;
+    function Game(instance) {
+      var i, _i, _ref, _ref1;
+      if (instance == null) {
+        instance = true;
       }
-      if (music) {
+      this.hint = 0;
+      if (instance) {
         $.audioPlayerA.playString("0123456789");
+        this.hintEvent = 0;
+        if ((_ref = $.gameMode) === $.modeOCD || _ref === $.modeEndless) {
+          this.hint = setInterval(function() {
+            return gameHint("如果不想玩了或者没有数可以消除, 可以点击右上角的结束游戏");
+          }, 15000);
+        }
       }
       $.backgroundBlockId = 0;
       this.score = new NAN.Score;
@@ -37,7 +44,7 @@
       this.timeLeft = 60;
       this.timeTotal = 60;
       this.gridQueue = [];
-      for (i = _i = 0, _ref = this.numGridRows; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+      for (i = _i = 0, _ref1 = this.numGridRows; 0 <= _ref1 ? _i < _ref1 : _i > _ref1; i = 0 <= _ref1 ? ++_i : --_i) {
         this.grids[i] = [];
       }
       this.startTime = getTime();
@@ -208,6 +215,9 @@
         }
       }
       this.updateTimeLeft();
+      if ($.gameMode === $.modeOCD && this.gridQueue.length <= 1) {
+        this.over();
+      }
       return $("#progressbar").attr("value", "" + (this.timeLeft / this.timeTotal * 100));
     };
 
@@ -226,7 +236,7 @@
           $("#game-count-down").css("color", "#454");
         }
         $("#game-count-down").html(Math.max(0, Math.floor(this.timeLeft)));
-        if (this.timeLeft <= 0 && !this.gameOver) {
+        if (this.timeLeft <= 0) {
           return this.over();
         }
       } else {
@@ -237,14 +247,24 @@
     Game.prototype.over = function() {
       var delay, prefix, ratio,
         _this = this;
+      if (this.gameOver) {
+        return;
+      }
+      this.gameOver = true;
+      if (this.hint) {
+        clearInterval(this.hint);
+      }
+      $("#game-over-mode-hint").html($.modeChinese[$.gameMode]);
+      if ($.numberShow && !$.numberShow.finished) {
+        $.numberShow.onClick();
+      }
       $.audioPlayerA.playString("9876543210");
       delay = 2000;
       this.finalScore = this.score.value;
       this.score.addValue(-this.finalScore);
-      this.gameOver = true;
       new NAN.RotateTask("#game-over-screen", -1);
       $(".score").fadeOut(500);
-      if ($.mode === $.modeOCD) {
+      if ($.gameMode === $.modeOCD) {
         ratio = 3 / (3 + this.gridQueue.length);
         this.finalScore *= ratio;
         prefix = "";
@@ -253,8 +273,9 @@
         } else {
           prefix = "剩余" + this.gridQueue.length + "个方块";
         }
-        $("#ocd-hint").hint("" + prefix + ", 分数为" + (Math.floor(ratio * 100)) + "%");
+        $("#ocd-hint").html("" + prefix + ", 获得" + (Math.floor(ratio * 100)) + "%分数");
       }
+      $.shareScore = this.finalScore;
       setTimeout(function() {
         _this.score.addValue(_this.finalScore);
         return $(".score").fadeIn(500);
@@ -271,10 +292,10 @@
 
   this.gameHint = function(text) {
     $("#game-area-hint").html(text);
-    $("#game-area-hint").fadeIn(250);
+    $("#game-area-hint").fadeIn(150);
     return setTimeout(function() {
-      return $("#game-area-hint").fadeOut(250);
-    }, 1500);
+      return $("#game-area-hint").fadeOut(150);
+    }, 2200);
   };
 
   this.switchToNanScreen = function() {
@@ -291,11 +312,6 @@
     var timeStep;
     $("#number-show").hide(0);
     $("#game-area").hide(0);
-    if ($.mode !== $.modeOCD) {
-      $("#ocd-hint").hide(0);
-    } else {
-      $("#ocd-hint").show(0);
-    }
     new NAN.RotateTask("#game-area");
     $.game = new NAN.Game;
     if ($.gameUpdater) {
@@ -307,7 +323,7 @@
     }, 2500);
     setTimeout(function() {
       return gameHint("数字性质越特殊, 分数越高");
-    }, 4600);
+    }, 5100);
     $(".square").remove();
     $("#number-show").hide();
     $("#number-show").css("opacity", "0.0");
@@ -355,8 +371,13 @@
 
   this.changeMode = function(mode) {
     $.gameMode = mode;
-    $("#mod-explanation").html($.modeExplanations[mode]);
-    return $("#game-mode-hint").html($.modeChinese[mode]);
+    $("#mod-explanation").html($.modeChinese[mode] + "<br>" + $.modeExplanations[mode]);
+    $("#game-mode-hint").html($.modeChinese[mode]);
+    if ($.gameMode !== $.modeOCD) {
+      return $("#ocd-hint").hide(0);
+    } else {
+      return $("#ocd-hint").show(0);
+    }
   };
 
   this.init = function() {
@@ -433,7 +454,15 @@
       }
     });
     listenClick($("#game-over-share"), function() {
-      window.open("http://share.renren.com/share/buttonshare.do?link=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F&title=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F");
+      var rrShareParam;
+      rrShareParam = {
+        resourceUrl: 'http://iteratoradvance.github.io/',
+        srcUrl: 'http://iteratoradvance.github.io/',
+        pic: '',
+        title: 'Not A Number! 发现隐藏在数字中的秘密! 4种游戏模式供您选择, 挑战你的数学直觉!',
+        description: "我在" + $.modeChinese[$.gameMode] + "中获得" + $.shareScore + "分, 快来和我一比高下吧!"
+      };
+      rrShareOnclick(rrShareParam);
       return queryNumber(-2);
     });
     listenClick($("#nan-screen"), function() {

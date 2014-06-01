@@ -184,6 +184,8 @@ class NAN.Game
                 prefix = "剩余#{@gridQueue.length}个方块"
             $("#ocd-hint").html("#{prefix}, 获得#{Math.floor(ratio * 100)}%分数")
 
+        $.shareScore = @finalScore
+
         setTimeout(
             =>
                 @score.addValue(@finalScore)
@@ -382,7 +384,15 @@ $.dataServer = "http://4.getwb.sinaapp.com/counter/"
     listenClick(
         $("#game-over-share"),
         =>
-            window.open("http://share.renren.com/share/buttonshare.do?link=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F&title=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F")
+            rrShareParam = {
+                    resourceUrl : 'http://iteratoradvance.github.io/', 
+                    srcUrl : 'http://iteratoradvance.github.io/',
+                    pic : '',
+                    title : 'Not A Number! 发现隐藏在数字中的秘密! 4种游戏模式供您选择, 挑战你的数学直觉!',
+                    description : "我在[#{$.modeChinese[$.gameMode]}]中获得 [#{$.shareScore}] 分, 快来和我一比高下吧!"
+                }
+            rrShareOnclick(rrShareParam);
+#            window.open("http://share.renren.com/share/buttonshare.do?link=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F&title=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F")
             queryNumber(-2)
     )
     

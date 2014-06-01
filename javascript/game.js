@@ -275,6 +275,7 @@
         }
         $("#ocd-hint").html("" + prefix + ", 获得" + (Math.floor(ratio * 100)) + "%分数");
       }
+      $.shareScore = this.finalScore;
       setTimeout(function() {
         _this.score.addValue(_this.finalScore);
         return $(".score").fadeIn(500);
@@ -453,7 +454,15 @@
       }
     });
     listenClick($("#game-over-share"), function() {
-      window.open("http://share.renren.com/share/buttonshare.do?link=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F&title=http%3A%2F%2Fiteratoradvance%2Egithub%2Eio%2F");
+      var rrShareParam;
+      rrShareParam = {
+        resourceUrl: 'http://iteratoradvance.github.io/',
+        srcUrl: 'http://iteratoradvance.github.io/',
+        pic: '',
+        title: 'Not A Number! 发现隐藏在数字中的秘密! 4种游戏模式供您选择, 挑战你的数学直觉!',
+        description: "我在[" + $.modeChinese[$.gameMode] + "]中获得 [" + $.shareScore + "] 分, 快来和我一比高下吧!"
+      };
+      rrShareOnclick(rrShareParam);
       return queryNumber(-2);
     });
     listenClick($("#nan-screen"), function() {
