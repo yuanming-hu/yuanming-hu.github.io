@@ -142,7 +142,7 @@ class NAN.Grid
             @mouse.addGrid(this)
 
     makeSound: ()->
-        $.audioPlayerA.play(@value, 0.2)
+        $.audioPlayerA.play(@value, 0.5)
 
 
     mouseOver: ()->

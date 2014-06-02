@@ -3,7 +3,7 @@ class NAN.Game
     constructor: (instance = true)->
         @hint = 0
         if instance
-            $.audioPlayerA.playString("0123456789")
+            $.audioPlayerA.playString("1234567")
             @hintEvent = 0
             if $.gameMode in [$.modeOCD, $.modeEndless]
                 @hint = setInterval(
@@ -168,7 +168,7 @@ class NAN.Game
         $("#game-over-mode-hint").html($.modeChinese[$.gameMode])
         if $.numberShow and not $.numberShow.finished
             $.numberShow.onClick()
-        $.audioPlayerA.playString("9876543210")
+        $.audioPlayerA.playString("7654321")
         delay = 2000
         @finalScore = Math.floor(@score.value)
         @score.addValue(-@finalScore)
@@ -337,6 +337,7 @@ $.dataServer = "http://4.getwb.sinaapp.com/counter/"
     )
     queryNumber(0,
         (text)->
+            $.playerId = parseInt(text)
             $("#welcome-screen-user-count").html("你是第#{text}个玩家")
     )
     $.currentScreen = "#welcome-screen"
@@ -349,7 +350,13 @@ $.dataServer = "http://4.getwb.sinaapp.com/counter/"
         
     $.audioPlayerA = new NAN.AudioPlayer("a")
     $.audioPlayerB = new NAN.AudioPlayer("b")
-    $.audioPlayerB.playString("02468")
+
+    setTimeout ->
+            if $.playerId
+                $.audioPlayerB.playString($.playerId.toString())
+            else
+                $.audioPlayerB.playString("2468")
+        , 1500
     $.analyzer = new window.NAN.Analyzer
     $.game = new NAN.Game(false)
     $.inTransition = false

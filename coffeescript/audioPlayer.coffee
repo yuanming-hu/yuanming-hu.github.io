@@ -50,11 +50,11 @@ class NAN.AudioPlayer
 			, 0
 		)
 
-	play: (n, volumn = 1.0) ->
+	play: (n, volume = 0.7) ->
 		return if @disabled
 		sound = @sounds[n][@pointer[n]] #.cloneNode(true)
 		@pointer[n] = (@pointer[n] + 1) % @copies
-		sound.volumn = volumn
+		sound.volume = volume
 		sound.play()
 
 	playString: (n)->

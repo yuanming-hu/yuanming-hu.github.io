@@ -71,17 +71,17 @@
       }, 0);
     }
 
-    AudioPlayer.prototype.play = function(n, volumn) {
+    AudioPlayer.prototype.play = function(n, volume) {
       var sound;
-      if (volumn == null) {
-        volumn = 1.0;
+      if (volume == null) {
+        volume = 0.7;
       }
       if (this.disabled) {
         return;
       }
       sound = this.sounds[n][this.pointer[n]];
       this.pointer[n] = (this.pointer[n] + 1) % this.copies;
-      sound.volumn = volumn;
+      sound.volume = volume;
       return sound.play();
     };
 

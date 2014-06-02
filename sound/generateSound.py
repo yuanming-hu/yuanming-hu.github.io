@@ -4,7 +4,9 @@ from midiutil.MidiFile import MIDIFile
 import os
 
 
-plist = [69, 71, 72, 74, 76, 77, 79, 81, 83, 84]
+#http://www.phys.unsw.edu.au/jw/notes.html
+plist = [60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84]
+#plist = [69, 71, 72, 74, 76, 77, 79, 81, 83, 84]
 #plist = [60, 71, 71, 67, 69, 72, 74, 76, 79, 81]
 
 
@@ -19,7 +21,7 @@ def generate(n, program, suffix, sf = "/usr/share/sounds/sf2/FluidR3_GM.sf2", vo
 	time = 0
 	duration = 2.0
 	MyMIDI.addProgramChange(track, channel, 0, program)
-	MyMIDI.addNote(track,channel, plist[n], 0,duration,volume)
+	MyMIDI.addNote(track,channel, plist[n] + 12, 0,duration,volume)
 	binfile = open("output.mid", 'wb')
 	MyMIDI.writeFile(binfile)
 	binfile.close()
@@ -37,5 +39,5 @@ for i in range(10):
 	generate(i, 10, "a")
 
 for i in range(10):
-	generate(i, 0, "b", "'Piano.sf2'")
+	generate(i, 0, "b", "'Giga Piano.sf2'")
 #	generate(i, 0, "b", "'musicbox.sf2'")

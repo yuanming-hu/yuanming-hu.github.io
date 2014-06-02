@@ -10,7 +10,7 @@
       }
       this.hint = 0;
       if (instance) {
-        $.audioPlayerA.playString("0123456789");
+        $.audioPlayerA.playString("1234567");
         this.hintEvent = 0;
         if ((_ref = $.gameMode) === $.modeOCD || _ref === $.modeEndless) {
           this.hint = setInterval(function() {
@@ -259,7 +259,7 @@
       if ($.numberShow && !$.numberShow.finished) {
         $.numberShow.onClick();
       }
-      $.audioPlayerA.playString("9876543210");
+      $.audioPlayerA.playString("7654321");
       delay = 2000;
       this.finalScore = Math.floor(this.score.value);
       this.score.addValue(-this.finalScore);
@@ -414,6 +414,7 @@
       return $("#nan-player-count").html("and " + $.totalPlayers + " players with " + $.totalNumbers + " numbers");
     }, 100);
     queryNumber(0, function(text) {
+      $.playerId = parseInt(text);
       return $("#welcome-screen-user-count").html("你是第" + text + "个玩家");
     });
     $.currentScreen = "#welcome-screen";
@@ -426,7 +427,13 @@
     }
     $.audioPlayerA = new NAN.AudioPlayer("a");
     $.audioPlayerB = new NAN.AudioPlayer("b");
-    $.audioPlayerB.playString("02468");
+    setTimeout(function() {
+      if ($.playerId) {
+        return $.audioPlayerB.playString($.playerId.toString());
+      } else {
+        return $.audioPlayerB.playString("2468");
+      }
+    }, 1000);
     $.analyzer = new window.NAN.Analyzer;
     $.game = new NAN.Game(false);
     $.inTransition = false;
