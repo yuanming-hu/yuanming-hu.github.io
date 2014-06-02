@@ -447,7 +447,7 @@
     $.modeChinese = [];
     $.modeChinese[$.modeClassic] = "经典模式";
     $.modeChinese[$.modeAdvanced] = "进阶模式";
-    $.modeChinese[$.modeOCD] = "强迫模式";
+    $.modeChinese[$.modeOCD] = "消除模式";
     $.modeChinese[$.modeEndless] = "无尽模式";
     $.modeExplanations[$.modeClassic] = "在60s内获得尽可能高的分数";
     $.modeExplanations[$.modeAdvanced] = "时间限制60s, 得到有意义的数加1秒, 否则减2秒";
