@@ -397,7 +397,7 @@ $.dataServer = "http://4.getwb.sinaapp.com/counter/"
                 newGame()
     )
     listenClick(
-        $("#welcome-screen"),
+        $("#button-game-start"),
         =>
             if not $.inTransition
                 newGame()

@@ -32,7 +32,7 @@
 
   <div id="title" style="position:relative;">
     <div id = "title-1" class = "title" style="color: #897; line-height: 80%; font-size: 192px; margin: 20px 0 0 0; text-shadow: 3px 3px 10px hsla(0, 0%, 0%, 0.2)">NAN</div>
-    <div id = "title-3" class = "title" style="color: #585; line-height: 95%; font-size: 41px; text-shadow: 3px 3px 10px hsla(0, 0%, 0%, 0.2);">A Game for Nannan</div>
+    <div id = "title-3" class = "title" style="color: #585; line-height: 90%; font-size: 40px; text-shadow: 3px 3px 10px hsla(0, 0%, 0%, 0.2);">A Game for Nannan</div>
 
   </div>
 
@@ -42,12 +42,12 @@
       <div id="number-show-score" class="number-show-box" style="color: #595;"> </div>
       <div id="number-show-ajax" class="number-show-box" style="color: #595; bottom: 34px; margin: 0 0; line-height: 20px; position: absolute; width: 600px; font-size: 25px; color: #464"> </div>
       <div id="number-show-descriptions" charset="UTF-8" class="number-show-box" style=" line-height:50px; margin: 0 auto;"> </div>
-      <div id="number-show-hint" charset="UTF-8"> Click to continue</div>
+      <div id="number-show-hint" charset="UTF-8">Click to continue</div>
     </div>
 
     <div id="game-area" class="board">
-      <a id="manual-game-over" class="mod-select" style="position:absolute; top: 0px; right: 0px; z-index:9999">结束游戏</a>
-      <a id="game-mode-hint" style="position:absolute; top: 30px; right: 9px; z-index:9999; font-size: 17px; color: #686"> </a>
+      <a id="manual-game-over" class="mod-select" style="position:absolute; top: 5px; right: 5px; z-index:9999">结束游戏</a>
+      <a id="game-mode-hint" style="position:absolute; top: 35px; right: 14px; z-index:9999; font-size: 17px; color: #686"> </a>
 
       <div class="score" style="z-index: 4000; top: 0px">0</div>
       <progress id="progressbar" value="100" max="100" style="position: absolute; left:53px; top: 75px; width: 456px;"></progress> 
@@ -79,23 +79,19 @@
 
     <div id="welcome-screen" class="board" style="z-index: 5002">
       <div style="font-size:130px; margin: 15px auto 0; height:140px">数非数</div>
-      <div style="font-size:31px; margin: 15px 0px 0px; ">预祝扬州中学学子高考顺利!</div>
-      <div style="font-size:31px; margin: 0px 0px 0px; ">全国学子高考加油!</div>
-      <div id="welcome-screen-user-count" style="font-size:20px; margin: 0px auto; width:600px; height: 30px"></div>
+      <div id="welcome-screen-user-count" style="font-size:20px; margin: 20px auto 50px; width:600px; height: 30px"></div>
+      <div style='font-size:30px; '><a href='https://github.com/IteratorAdvance/iteratoradvance.github.io' style='text-decoration: none; color: #787' target=_blank> Fork me on github!</a></div>
       <div style="font-size:26px; margin: 5px auto 0px">现在可通过<b>NotANumber.tk</b>访问</div>
-      <div style="font-size:13px; margin: 0px auto 15px">(似乎不太稳定)</div>
-
-
       <div style="font-size:34px; margin: 0px auto 10px">感谢基友们的测试与指导</div>
-      <div style="font-size:20px; ">在计算机/iPad上使用Chrome/Safari浏览器<br>以获得更好的体验(听说IE也能玩?)</div>
+      <div style="font-size:26px; ">在计算机/iPad以获得更好的体验</div>
       <div style="font-size:22px; ">在计算机上请进入全屏模式并开启声音</div>
-      <div style="font-size:20px; ">iPad上请使用竖屏</div>
+      <div style="font-size:24px; ">暂不支持Firefox;     iPad上请使用竖屏</div>
       <a id="mod-select-classic" class="mod-select" style="margin: 0px 0 0 115px ">经典模式</a>
       <a id="mod-select-advanced" class="mod-select">进阶模式</a>
       <a id="mod-select-OCD" class="mod-select">消除模式</a>
       <a id="mod-select-endless" class="mod-select">无尽模式</a>
       <div id="mod-explanation" style="font-size:18px; margin: 0px auto; color: #787"></div>
-      <div style="font-size:68px; margin: -20px auto">Click to start</div>
+      <div id="button-game-start" style="font-size:68px; margin: 0px auto; cursor: pointer;">Click to start</div>
     </div>
 
 
