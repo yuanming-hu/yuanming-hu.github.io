@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "dark_corner.js",
+  "sourceRoot": "",
+  "sources": [
+    "dark_corner.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,EAAA,KAAK,CAAC,gBAAN,GAAyB;AAAA,IACvB,QAAA,EAAU;AAAA,MACR,UAAA,EAAY;AAAA,QAAC,IAAA,EAAM,GAAP;AAAA,QAAY,KAAA,EAAO,IAAnB;OADJ;KADa;AAAA,IAIvB,YAAA,EACE,uHALqB;AAAA,IAYvB,cAAA,EACE,8YAbqB;GAAzB,CAAA;AAAA"
+}

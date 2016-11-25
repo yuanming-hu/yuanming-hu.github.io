@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "alpha_color_shader.js",
+  "sourceRoot": "",
+  "sources": [
+    "alpha_color_shader.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,EAAA,KAAK,CAAC,sBAAN,GAA+B,SAAA,GAAA;WAC7B;AAAA,MACE,YAAA,EACE,uHAFJ;AAAA,MAUE,cAAA,EACE,4EAXJ;AAAA,MAiBE,WAAA,EAAa,IAjBf;AAAA,MAmBE,WAAA,EAAa,cAAA,CAAA,CAnBf;MAD6B;EAAA,CAA/B,CAAA;AAAA"
+}
