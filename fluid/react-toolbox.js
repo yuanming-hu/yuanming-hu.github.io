@@ -4208,7 +4208,7 @@
 	                        _react2.default.createElement(
 	                            _card.CardText,
 	                            null,
-	                            'Currently, there exist some known issues, such as the volume of the fluid slowly shrinks. One remedy to this may be adding some adjustment to the pressure and reseeding the particles. However, since WebGL doesn\'t support atomic operations, adding reseeding tactics can be rather challenging. Many features will be added in the future, notwithstanding.'
+	                            'Currently, there exist some known issues, such as the volume of the fluid slowly shrinks. One remedy to this may be adding some adjustment to the pressure and reseeding the particles. However, since WebGL doesn\'t support atomic operations, adding reseeding tactics can be rather challenging.'
 	                        ),
 	                        _react2.default.createElement(
 	                            _card.CardText,
@@ -4218,7 +4218,7 @@
 	                        _react2.default.createElement(
 	                            _card.CardText,
 	                            null,
-	                            'The source code will be hosted on github once the author thinks it is well organized and won\'t pollute the readers\' eyes :-). If you want to get the source code now anyway, or have some suggestions on this project, please contact the author (hu-ym13@mails.tsinghua.edu.cn). Comments are appreciated! :->'
+	                            'Have fun! Feedback is welcome! :->'
 	                        ),
 	                        _react2.default.createElement(_card.CardTitle, {
 	                            avatar: __webpack_require__(279),
